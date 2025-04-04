@@ -9,8 +9,8 @@ main:
    # op1 * op1
    lw t0, op1
    lw t1, op1
-   mulhu a0, t1, t0
-   beqz a0, print1  # If the upper part is 0, print the number.
+   mulh a0, t1, t0
+   bnez a0, print1  # If the upper part is 0, print the number.
    la a0, msg       # else print overflow message
    li a7, 4
    ecall
@@ -21,7 +21,7 @@ main:
 
 print1:
    mul a0, t0, t1
-   li a7, 36
+   li a7, 1
    ecall
    la a0, msg2
    li a7, 4
@@ -32,7 +32,7 @@ next1:
    # op2 * op2
    lw t0, op2
    lw t1, op2
-   mulhu a0, t1, t0
+   mulh a0, t1, t0
    beqz a0, print2
    la a0, msg
    li a7, 4
@@ -44,7 +44,7 @@ next1:
 
 print2:
    mul a0, t0, t1
-   li a7, 36
+   li a7, 1
    ecall
    la a0, msg2
    li a7, 4
@@ -55,8 +55,8 @@ next2:
    # op1 * op2
    lw t0, op1
    # the register t1 already has op2
-   mulhu a0, t1, t0
-   beqz a0, print3
+   mulh a0, t1, t0
+   bnez a0, print3
    la a0, msg
    li a7, 4
    ecall
@@ -67,7 +67,7 @@ next2:
 
 print3:
    mul a0, t0, t1
-   li a7, 36
+   li a7, 1
    ecall
    la a0, msg2
    li a7, 4
